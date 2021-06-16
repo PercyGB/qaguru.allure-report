@@ -12,7 +12,7 @@ import static io.qameta.allure.Allure.step;
 public class IssueSearchTests {
 
     private static final String BASE_URL = "https://github.com";
-    private static final String REPOSITORY = "eroshenkoam/allure-example";
+    private static final String REPOSITORY_NAME = "eroshenkoam/allure-example";
     private static final String ISSUE_NAME = "с днем археолога!";
 
     private WebSteps steps = new WebSteps();
@@ -24,10 +24,10 @@ public class IssueSearchTests {
             open(BASE_URL);
 
             $(".header-search-input").click();
-            $(".header-search-input").sendKeys(REPOSITORY);
+            $(".header-search-input").sendKeys(REPOSITORY_NAME);
             $(".header-search-input").submit();
 
-            $(By.linkText(REPOSITORY)).click();
+            $(By.linkText(REPOSITORY_NAME)).click();
 
             $(withText("Issues")).click();
 
@@ -41,16 +41,16 @@ public class IssueSearchTests {
             open(BASE_URL);
         });
 
-        step("Ищем репозиторий " + REPOSITORY, (s) -> {
-            s.parameter("repository", REPOSITORY);
+        step("Ищем репозиторий " + REPOSITORY_NAME, (s) -> {
+            s.parameter("repository", REPOSITORY_NAME);
             $(".header-search-input").click();
-            $(".header-search-input").sendKeys(REPOSITORY);
+            $(".header-search-input").sendKeys(REPOSITORY_NAME);
             $(".header-search-input").submit();
         });
 
-        step("Переходим в репозиторий " + REPOSITORY, (s) -> {
-            s.parameter("repository", REPOSITORY);
-            $(By.linkText(REPOSITORY)).click();
+        step("Переходим в репозиторий " + REPOSITORY_NAME, (s) -> {
+            s.parameter("repository", REPOSITORY_NAME);
+            $(By.linkText(REPOSITORY_NAME)).click();
         });
 
         step("Открываем таб Issues в репозитории", () -> {
@@ -66,10 +66,10 @@ public class IssueSearchTests {
     @Test
     void IssueSearchTestWithAnnotatedSteps(){
         steps.openMainPage(BASE_URL);
-        steps.searchForRepository(REPOSITORY);
-        steps.goToRepository(REPOSITORY);
+        steps.searchForRepositoryByName(REPOSITORY_NAME);
+        steps.goToRepository(REPOSITORY_NAME);
         steps.openIssuesTab();
-        steps.shouldSeeIssueWithNumber(ISSUE_NAME);
+        steps.shouldSeeIssueWithName(ISSUE_NAME);
     }
 
 
